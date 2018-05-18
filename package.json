@@ -1,0 +1,21 @@
+{
+  "name": "github-issue-vuepress-blog",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vuepress dev",
+    "fetch": "node tools/fetch.js",
+    "build": "npm run fetch && vuepress build docs",
+    "deploy": "sh tools/deploy.sh",
+    "test": "echo OK"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "mz": "^2.7.0",
+    "remove-markdown": "^0.2.2",
+    "urllib": "^2.27.0",
+    "vuepress": "^0.8.4"
+  }
+}

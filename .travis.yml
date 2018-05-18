@@ -1,0 +1,18 @@
+language: node_js
+node_js:
+- '8'
+script: npm run build
+deploy:
+- provider: pages
+  skip-cleanup: true
+  local-dir: docs/.vuepress/dist
+  repo: orangemi/orangemi.github.io
+  github-token:
+    secure: "t8IFVI1LE6vY3JsSpfsEfx6/OMecex1iaV4MVUxoUCdpsVTbjhEtslJE5EbLD6ZJ2uZV2mPxCZGwyQN4LUkWzsOTh+07/L2rTV0OgAW8/yRRkAvCWvfY2nIlOpCWaYmEdLAGCZpOflNOl8MwugQYfqwGXFwKpDkG4S/fisikEaUOlbbpAedW6WLn/CfqumvLet9EGayklAh+I+OHAtNJz5oJ7eej8lAU+LsEQbxMQNbPhXxFaHb4VMzWyZJL/kQeY5E1VsckKL7QYhfNJKRnBD+sKX2XocTQKeK2cv3+N3AcOEVvXXrnQ3gsehINcQ6sb5X+piGiLYAf+w7MUy+WaH5UuWRJFjczL05xNzkIzt7zMTiUbJzRcMhEG3qufU6Sl3rpnSosDmxmN6grLDTlhafQBPYz/cgqJzJQlCUfcluBjD3UrCxg652yEuOZEYsOeoxvbN1p07tpfznworu6HjRaAOflchxLK7HJpYiNpJjt3jt+snb+zUYaPgDVw1SFLJ2f8I5r5Ee/L6FvtGf8QeYifIA0XIf3g2vng2fWCmtJVYIk0sE2A7Jcf9rLhhsykThF2Jb8iOCOrhYsyjg3SWEJxzdZX79KIkLNEzVKuHhpxN/r0iuh4XT6wTrFh9dCJ9kC86REqOLC2dw0CuCD2c2ID38tr3ieJNDSbw8so28="
+    # $GITHUB_TOKEN  # Set in the settings page of your repository, as a secure variable
+  keep-history: true
+  target-branch: master
+  on:
+    branch: master
+
+  
