@@ -12,12 +12,16 @@ async function main () {
   await child.exec(`rm -rf docs && mkdir docs`)
   const indexStream = fs.createWriteStream(path.resolve(__dirname, '../docs/README.md'))
   indexStream.write('Index\r=====\r\r')
+  let page = 1
   while (true) {
-    const blogs = await fetch(1)
+    const blogs = await fetch(page++)
+    if (!Array.isArray(blogs)) break
+    console.log('fetched', blogs.length, 'blogs')
     writeContent(indexStream, blogs)
     if (blogs.length < 30) break
   }
   indexStream.end()
+  console.log('fetch complete')
 }
 
 async function writeContent (indexStream, blogs) {
@@ -42,6 +46,11 @@ async function fetch (page = 1) {
     },
     dataType: 'json'
   })
+  if (resp.status !== 200) {
+    const e = new Error('fetch error')
+    Object.assign(e, {status: resp.status, headers: resp.headers, data: resp.data})
+    throw e
+  }
   return resp.data
 }
 
