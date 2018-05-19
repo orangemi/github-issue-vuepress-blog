@@ -23,12 +23,13 @@ async function main () {
 async function writeContent (indexStream, blogs) {
   blogs.forEach(blog => {
     const title = `${blog.number}-${blog.title}`
-    const filepath = path.resolve(__dirname, '../docs/', `${title}.md`)
+    const filepath = path.resolve(__dirname, '../docs/', `${blog.number}.md`)
     const filestream = fs.createWriteStream(filepath)
 
+    filestream.write(blog.title + '\r===\r\r')
     filestream.write(blog.body)
     filestream.end()
-    indexStream.write(`## [${title}](./${encodeURIComponent(title)}.md)\r`)
+    indexStream.write(`## [${title}](./${encodeURIComponent(blog.number)}.md)\r`)
     const summary = removeMD(blog.body).substring(0, 50).replace(/[\r\n]/g, ' ') + '...\r\r'
     indexStream.write(summary)
   })
