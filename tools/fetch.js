@@ -1,6 +1,6 @@
 const path = require('path')
 const fs = require('mz/fs')
-const {request} = require('urllib')
+const axios = require('axios').default
 const child = require('mz/child_process')
 const removeMD = require('remove-markdown')
 
@@ -40,12 +40,7 @@ async function writeContent (indexStream, blogs) {
 }
 
 async function fetch (page = 1) {
-  const resp = await request(`https://api.github.com/repos/${author}/${repo}/issues?creator=${author}&labels=${labels}&page=${page}`, {
-    headers: {
-      // accept: 'application/vnd.github.symmetra-preview+json',
-    },
-    dataType: 'json'
-  })
+  const resp = await axios.get(`https://api.github.com/repos/${author}/${repo}/issues?creator=${author}&labels=${labels}&page=${page}`)
   if (resp.status !== 200) {
     const e = new Error('fetch error')
     Object.assign(e, {status: resp.status, headers: resp.headers, data: resp.data})
